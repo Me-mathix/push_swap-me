@@ -14,3 +14,5 @@ int		ft_tablen(char **tab);
 t_case	*init_stack_a(t_case *head, char **tab);
 void	ft_compactage(t_case *head, t_case *new_case);
 t_case	*ft_newcase(int content);
+void	mergeSort(int arr[], int l, int r);
+void	merge(int arr[], int l, int m, int r);
