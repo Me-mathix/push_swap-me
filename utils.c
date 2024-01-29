@@ -46,29 +46,31 @@ t_case	*ft_newcase(int content)
 	newlst->nb = content;
 	return (newlst);
 }
-void ft_compactage(t_case *head, t_case *new_case)
+void ft_compactage(t_case *head, t_case *new_case, int i)
 {
 	t_case *tmp;
 
 	tmp = head;
 	while (tmp->next != head)
 	{
-		if (tmp->nb == tmp->next->nb)
+		if (tmp->nb == new_case->nb)
 			exit(111);
 		tmp = tmp->next;
 	}
-	if (tmp->next == head && tmp->prev == head)
+	if (head->next == head && head->prev == head)
 	{
-		tmp->next = new_case;
-		tmp->prev = new_case;
+		head->next = new_case;
+		head->prev = new_case;
 		new_case->next = head;
 		new_case->prev = head;
+		new_case->real_pos = i;
 		return ;
 	}
 	head->prev->next = new_case;
 	new_case->prev = head->prev;
 	new_case->next = head;
 	head->prev = new_case;
+	new_case->real_pos = i;
 }
 
 t_case *init_stack_a(t_case *head, char **tab)
@@ -79,7 +81,11 @@ t_case *init_stack_a(t_case *head, char **tab)
 	head = ft_newcase(ps_atoi(tab[0]));
 	head->prev = head;
 	head->next = head;
+	head->real_pos = 1;
 	while (i < ft_tablen(tab))
-		ft_compactage(head, ft_newcase(ps_atoi(tab[i++])));
+	{
+		ft_compactage(head, ft_newcase(ps_atoi(tab[i])), i + 1);
+		i++;
+	}
 	return (head);
 }
