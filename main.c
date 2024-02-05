@@ -78,21 +78,5 @@ int main(int ac, char **av)
 	stack_a = init_stack_a(stack_a, tmp);
 	looking_for_index(stack_a, ac);
 	ft_free(tmp);
-	// push_swap(stack_a, stack_b);
-	t_case *test = stack_a;
-	// for (size_t i = 1; i <= 10; i++)
-	// {
-	// 	printf("nb %d || index %d || real_pos %d\n", test->nb, test->index, test->real_pos);
-	// 	test = test->next;
-	// }
-	ra_rra(&stack_a, 0);
-	ra_rra(&stack_a, 0);
-	pb(&stack_a, &stack_b);
-	test = stack_b;
-	for (size_t i = 1; i <= 10; i++)
-	{
-		printf("nb %d || index %d || real_pos %d\n", test->nb, test->index, test->real_pos);
-		test = test->next;
-	}
-	return (0);
+	push_swap(stack_a, stack_b);
 }

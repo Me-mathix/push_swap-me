@@ -17,11 +17,14 @@ void	ft_compactage(t_case *head, t_case *new_case, int i);
 t_case	*ft_newcase(int content);
 void	mergeSort(int arr[], int l, int r);
 void	merge(int arr[], int l, int m, int r);
-void	swapper_value(t_case *first, t_case *second);
+void	swapper_value(t_case **stack);
 
 
 //! MOVEMENT
 
 void	pb(t_case **s_a, t_case **s_b);
-void	rb_rrb(t_case *stack, int i);
+void	pa(t_case **s_a, t_case **s_b);
+void	rb_rrb(t_case **stack, int i);
 void	ra_rra(t_case **stack, int i);
+void	sa(t_case **stack);
+void 	sb(t_case **stack);

@@ -1,0 +1,26 @@
+for (size_t i = 1; i <= 10; i++)
+{
+	printf("nb %d || index %d || real_pos %d\n", stack_a->nb, stack_a->index, stack_a->real_pos);
+	stack_a = stack_a->next;
+}
+printf("-------------------------------------------------------\nSTACK_b\n");
+for (size_t i = 1; i <= 10; i++)
+{
+	printf("nb %d || index %d || real_pos %d\n", stack_b->nb, stack_b->index, stack_b->real_pos);
+	stack_b = stack_b->next;
+}
+printf("\n\n\n-------------------------------------------------------\n RESET TO STACK A\n");
+// pa(&stack_a, &stack_b);
+// test_a = stack_a;
+// test_b = stack_b;
+for (size_t i = 1; i <= 10; i++)
+{
+	printf("nb %d || index %d || real_pos %d\n", test_a->nb, test_a->index, test_a->real_pos);
+	test_a = test_a->next;
+}
+printf("-------------------------------------------------------\nSTACK_b\n");
+for (size_t i = 1; i <= 10; i++)
+{
+	printf("nb %d || index %d || real_pos %d\n", test_b->nb, test_b->index, test_b->real_pos);
+	test_b = test_b->next;
+}
