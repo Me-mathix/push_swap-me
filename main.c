@@ -78,5 +78,5 @@ int main(int ac, char **av)
 	stack_a = init_stack_a(stack_a, tmp);
 	looking_for_index(stack_a, ac);
 	ft_free(tmp);
-	push_swap(stack_a, stack_b);
+	push_swap(&stack_a, &stack_b);
 }

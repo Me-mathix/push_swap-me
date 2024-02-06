@@ -28,3 +28,13 @@ void	rb_rrb(t_case **stack, int i);
 void	ra_rra(t_case **stack, int i);
 void	sa(t_case **stack);
 void 	sb(t_case **stack);
+
+// UTILS 
+
+void	uni_stack_pos_finder(t_case *stack);
+void 	duo_stack_pos_finder(t_case *s_a, t_case *s_b);
+int		ps_lstsize(t_case *lst);
+
+// ALGO
+
+void	push_swap(t_case **s_a, t_case **s_b);

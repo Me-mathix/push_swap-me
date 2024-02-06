@@ -12,6 +12,7 @@ void ra_rra(t_case **stack, int i)
 		printf("ra\n");
 		*stack = (*stack)->next;
 	}
+	uni_stack_pos_finder(*stack);
 }
 
 void rb_rrb(t_case **stack, int i)
@@ -26,6 +27,7 @@ void rb_rrb(t_case **stack, int i)
 		printf("rb\n");
 		*stack = (*stack)->next;
 	}
+	uni_stack_pos_finder(*stack);
 }
 
 void pb(t_case **s_a, t_case **s_b)
@@ -34,7 +36,6 @@ void pb(t_case **s_a, t_case **s_b)
 
 	if (!*s_b)
 	{
-		(*s_a)->real_pos = 1;
 		(*s_a)->next->prev = (*s_a)->prev;
 		(*s_a)->prev->next = (*s_a)->next;
 		tmp = (*s_a)->next;
@@ -42,6 +43,7 @@ void pb(t_case **s_a, t_case **s_b)
 		(*s_a)->prev = *s_b;
 		(*s_a)->next = *s_b;
 		*s_a = tmp;
+		duo_stack_pos_finder(*s_a, *s_b);
 		printf("pb\n");
 		return ;
 	}
@@ -51,6 +53,7 @@ void pb(t_case **s_a, t_case **s_b)
 	ft_compactage((*s_b), (*s_a), 2);
 	*s_b = *s_a;
 	*s_a = tmp;
+	duo_stack_pos_finder(*s_a, *s_b);
 	if ((*s_a)->next == (*s_b)->next && (*s_a)->prev == (*s_b)->prev)
 		*s_a = NULL;
 	printf("pb\n");
@@ -62,7 +65,6 @@ void pa(t_case **s_a, t_case **s_b)
 
 	if (!*s_a)
 	{
-		(*s_b)->real_pos = 1;
 		(*s_b)->next->prev = (*s_b)->prev;
 		(*s_b)->prev->next = (*s_b)->next;
 		tmp = (*s_b)->next;
@@ -70,6 +72,7 @@ void pa(t_case **s_a, t_case **s_b)
 		(*s_b)->prev = *s_a;
 		(*s_b)->next = *s_a;
 		*s_b = tmp;
+		duo_stack_pos_finder(*s_a, *s_b);
 		printf("pa\n");
 		return ;
 	}
@@ -79,6 +82,7 @@ void pa(t_case **s_a, t_case **s_b)
 	ft_compactage((*s_a), (*s_b), 2);
 	*s_a = *s_b;
 	*s_b = tmp;
+	duo_stack_pos_finder(*s_a, *s_b);
 	if ((*s_b)->next == (*s_a)->next && (*s_b)->prev == (*s_a)->prev)
 		*s_b = NULL;
 	printf("pa\n");
