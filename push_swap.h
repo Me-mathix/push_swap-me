@@ -28,6 +28,7 @@ void	rb_rrb(t_case **stack, int i);
 void	ra_rra(t_case **stack, int i);
 void	sa(t_case **stack);
 void 	sb(t_case **stack);
+void 	ss(t_case **s_a, t_case **s_b);
 
 // UTILS 
 

@@ -18,6 +18,12 @@ void road_to_b(t_case **s_a, t_case **s_b, t_case *node)
 {
 	while (node->real_pos != 1)
 	{
+		if (ps_lstsize(*s_b) > 2)
+			if (((node->real_pos == 2) && (node->nb < node->prev->nb)) 
+				&& ((*s_b)->index < (*s_b)->next->index))
+				ss(s_a, s_b);
+		if (node->real_pos == 1) 
+			break ;
 		if ((node->real_pos == 2) && (node->nb < node->prev->nb))
 			sa(s_a);
 		else if ((ps_lstsize(*s_a) - node->real_pos + 1) < node->real_pos)
@@ -54,15 +60,15 @@ void	pre_sort(t_case **s_a, t_case **s_b)
 	perc = ps_lstsize(*s_a) / 8;
 	j = ps_lstsize(*s_a);
 	tmp = *s_a;
-	while (i < j)
+	while (i <= j + 2)
 	{
-		if (tmp->index < ((perc * j) / j))
+		if ((tmp->index < ((perc * j) / j)))
 		{
-			road_to_b(s_a, s_b, tmp);
-			i++;
-			if (i == perc)
-				perc += j / 8;
-			tmp = *s_a;
+				road_to_b(s_a, s_b, tmp);
+				i++;
+				if (i == perc)
+					perc += j / 8;
+				tmp = *s_a;
 		}
 		tmp = tmp->next;
 	}
@@ -70,25 +76,29 @@ void	pre_sort(t_case **s_a, t_case **s_b)
 
 void	end_sort(t_case **s_a, t_case **s_b)
 {
-	t_case *tmp;
 	int j;
-	int i;
+	t_case *tmp;
 
-	tmp = *s_b;
-	i = 1;
 	j = ps_lstsize(*s_b);
-	while (i < j)
+	tmp = *s_b;
+	while (j != 1)
 	{
-		while ((*s_a)->index > (*s_a)->prev->index)
-			ra_rra(s_a, 1);
-		if (tmp->index == (*s_a)->index - 1 || tmp->index == (*s_a)->prev->index + 1)
+		if ((tmp->index - 1) == (*s_a)->prev->index)
 		{
 			road_to_a(s_a, s_b, tmp);
-			i++;
-			tmp = *s_b;	
+			ra_rra(s_a, 0);
+			j--;
+			tmp = *s_b;
+		}
+		else if ((tmp->index + 1) == (*s_a)->index)
+		{
+			road_to_a(s_a, s_b, tmp);
+			j--;
+			tmp = *s_b;
 		}
 		tmp = tmp->next;
 	}
+	pa(s_a, s_b);
 }
 
 void push_swap(t_case **s_a, t_case **s_b)
