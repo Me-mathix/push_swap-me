@@ -2,14 +2,20 @@
 
 void sa(t_case **stack)
 {
-	swapper_value(&*stack);
+	if (ps_lstsize(*stack) > 2)
+		swapper_value(stack);
+	else
+		*stack = (*stack)->next;
 	uni_stack_pos_finder(*stack);
 	printf("sa\n");
 }
 
 void sb(t_case **stack)
 {
-	swapper_value(&*stack);
+	if (ps_lstsize(*stack) > 2)
+		swapper_value(stack);
+	else
+		*stack = (*stack)->next;
 	uni_stack_pos_finder(*stack);
 	printf("sb\n");
 }

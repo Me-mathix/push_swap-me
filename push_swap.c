@@ -24,7 +24,9 @@ void road_to_b(t_case **s_a, t_case **s_b, t_case *node)
 				ss(s_a, s_b);
 		if (node->real_pos == 1) 
 			break ;
-		if ((node->real_pos == 2) && (node->nb < node->prev->nb))
+		if (ps_lstsize(*s_a) == 2)
+			sa(s_a);
+		else if ((node->real_pos == 2) && (node->nb < node->prev->nb))
 			sa(s_a);
 		else if ((ps_lstsize(*s_a) - node->real_pos + 1) < node->real_pos)
 			ra_rra(s_a, 1);

@@ -25,7 +25,7 @@ void duo_stack_pos_finder(t_case *s_a, t_case *s_b)
 	head = s_a;
 	head->real_pos = i++;
 	head = head->next;
-	while ((head != s_a) && (head->prev != s_a))
+	while (head != s_a)
 	{
 		head->real_pos = i++;
 		head = head->next;
