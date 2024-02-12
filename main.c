@@ -1,5 +1,31 @@
 #include "push_swap.h"
 
+void free_lst(t_case **s_a, t_case **s_b)
+{
+	t_case	*actual;
+	t_case	*sav;
+	int	i;
+
+	i = ps_lstsize(*s_a);
+	actual = *s_a;
+	while (i--)
+	{
+		sav = actual->next;
+		free(actual);
+		actual = sav;
+	}
+	*s_a = NULL;
+	i = ps_lstsize(*s_b);
+	actual = *s_b;
+	while (i--)
+	{
+		sav = actual->next;
+		free(actual);
+		actual = sav;
+	}
+	*s_b = NULL;
+}
+
 void	lst_indexing(t_case *stack_a, int index, int nb)
 {
 	t_case *head;
@@ -79,4 +105,5 @@ int main(int ac, char **av)
 	looking_for_index(stack_a, ac);
 	ft_free(tmp);
 	push_swap(&stack_a, &stack_b);
+	free_lst(&stack_a, &stack_b);
 }
