@@ -24,6 +24,7 @@ void free_lst(t_case **s_a, t_case **s_b)
 		actual = sav;
 	}
 	*s_b = NULL;
+	exit(1);
 }
 
 void	lst_indexing(t_case *stack_a, int index, int nb)
@@ -85,7 +86,11 @@ char **parse_arg(int ac, char **av)
 			exit(1);
 		tmp[ac - 1] = 0;
 		while (--ac != 0)
+		{
 			tmp[ac - 1] = ft_strdup(av[ac]);
+				if (!tmp[ac - 1])
+					ft_free(tmp);
+		}
 	}
 	return(tmp);
 }
@@ -102,6 +107,8 @@ int main(int ac, char **av)
 	tmp = parse_arg(ac, av);
 	ac = ft_tablen(tmp);
 	stack_a = init_stack_a(stack_a, tmp);
+	if (!stack_a)
+		return(ft_free(tmp), 0);	
 	looking_for_index(stack_a, ac);
 	ft_free(tmp);
 	push_swap(&stack_a, &stack_b);

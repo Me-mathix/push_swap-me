@@ -24,12 +24,8 @@ int	ps_atoi(const char *nptr)
 	if (nptr[i] == '-' || nptr[i] == '+')
 		if (nptr[i++] == '-')
 			neg *= -1;
-	if ((nptr[i] < '0') && (nptr[i] > '9'))
-		exit(12);
 	while (nptr[i])
 	{
-		if ((nptr[i] < '0') && (nptr[i] > '9'))
-			exit(12);
 		nbr = nbr * 10 + nptr[i] - 48;
 		i++;
 	}
@@ -46,16 +42,16 @@ t_case	*ft_newcase(int content)
 	newlst->nb = content;
 	return (newlst);
 }
+
 void ft_compactage(t_case *head, t_case *new_case, int i)
 {
 	t_case *tmp;
 
 	tmp = head;
-	while (tmp->next != head)
+	if (!new_case)
 	{
-		if (tmp->nb == new_case->nb)
-			exit(111);
-		tmp = tmp->next;
+		free_lst(&head,NULL);
+		return ;
 	}
 	if (head->next == head && head->prev == head)
 	{
@@ -73,11 +69,46 @@ void ft_compactage(t_case *head, t_case *new_case, int i)
 	new_case->real_pos = i;
 }
 
+int	ft_parse_error(char **tab)
+{
+	int i;
+	int j;
+	char *nb_test;
+
+	i = 0;
+	j = 0;
+	while (tab[i])
+	{
+		if (tab[i][j] == '-')
+			j++;
+		while (tab[i][j])
+			if (!ft_isdigit(tab[i][j++]))
+				return(0);
+		nb_test = ft_itoa(ft_atoi(tab[i]));
+		if (ft_strncmp(nb_test, tab[i], ft_strlen(tab[i])))
+			return(free(nb_test), 0);
+		free(nb_test);
+		j = i;
+		while(tab[++j])
+			if (ft_atoi(tab[i]) == ft_atoi(tab[j]))
+				return (0);
+		j = 0;
+		i++;
+	}
+	return(1);
+}
+
 t_case *init_stack_a(t_case *head, char **tab)
 {
 	int		i;
 
 	i = 1;
+	if (!ft_parse_error(tab) || !tab[0])
+	{
+		ft_free(tab);
+		ft_putendl_fd("Error", 2);
+		exit(1);
+	}	
 	head = ft_newcase(ps_atoi(tab[0]));
 	head->prev = head;
 	head->next = head;
@@ -85,6 +116,8 @@ t_case *init_stack_a(t_case *head, char **tab)
 	while (i < ft_tablen(tab))
 	{
 		ft_compactage(head, ft_newcase(ps_atoi(tab[i])), i + 1);
+		if (!head)
+			return(NULL);	
 		i++;
 	}
 	return (head);

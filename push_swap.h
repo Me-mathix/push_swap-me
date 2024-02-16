@@ -35,6 +35,7 @@ void 	ss(t_case **s_a, t_case **s_b);
 void	uni_stack_pos_finder(t_case *stack);
 void 	duo_stack_pos_finder(t_case *s_a, t_case *s_b);
 int		ps_lstsize(t_case *lst);
+void	free_lst(t_case **s_a, t_case **s_b);
 
 // ALGO
 
