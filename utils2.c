@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/20 12:53:19 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/02/20 12:54:07 by mda-cunh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void uni_stack_pos_finder(t_case *stack)
+void	uni_stack_pos_finder(t_case *stack)
 {
-	t_case *head;
-	int i;
+	t_case	*head;
+	int		i;
 
 	i = 1;
 	head = stack ;
@@ -16,10 +28,10 @@ void uni_stack_pos_finder(t_case *stack)
 	}
 }
 
-void duo_stack_pos_finder(t_case *s_a, t_case *s_b)
+void	duo_stack_pos_finder(t_case *s_a, t_case *s_b)
 {
-	t_case *head;
-	int i;
+	t_case	*head;
+	int		i;
 
 	i = 1;
 	head = s_a;
@@ -43,9 +55,8 @@ void duo_stack_pos_finder(t_case *s_a, t_case *s_b)
 
 int	ps_lstsize(t_case *lst)
 {
-
-	int	count;
-	t_case *head;
+	int		count;
+	t_case	*head;
 
 	if (!lst)
 		return (0);
@@ -58,4 +69,14 @@ int	ps_lstsize(t_case *lst)
 	}
 	count++;
 	return (count);
+}
+
+int	ft_tablen(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

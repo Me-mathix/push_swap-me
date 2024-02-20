@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/20 12:37:23 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/02/20 12:44:13 by mda-cunh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void free_lst(t_case **s_a, t_case **s_b)
+void	free_lst(t_case **s_a, t_case **s_b)
 {
 	t_case	*actual;
 	t_case	*sav;
-	int	i;
+	int		i;
 
 	i = ps_lstsize(*s_a);
 	actual = *s_a;
@@ -29,7 +41,7 @@ void free_lst(t_case **s_a, t_case **s_b)
 
 void	lst_indexing(t_case *stack_a, int index, int nb)
 {
-	t_case *head;
+	t_case	*head;
 
 	head = stack_a;
 	while (head->next != stack_a)
@@ -39,37 +51,39 @@ void	lst_indexing(t_case *stack_a, int index, int nb)
 			head->index = index;
 			return ;
 		}
-		head = head->next;		
+		head = head->next;
 	}
 	if (head->nb == nb)
-		head->index = index;	
+		head->index = index;
 }
 
 void	looking_for_index(t_case *stack_a, int ac)
 {
-	int *tab;
-	int i;
-	t_case *head;
+	int		*tab;
+	int		i;
+	t_case	*head;
 
 	i = 0;
 	head = stack_a;
 	tab = malloc((sizeof (int)) * ac);
+	if (!tab)
+		return ;
 	while (head->next != stack_a)
 	{
 		tab[i++] = head->nb;
 		head = head->next;
 	}
 	tab[i] = head->nb;
-	mergeSort(tab, 0, i);
+	ft_sort_int_tab(tab, i + 1);
 	i = -1;
 	while (++i < ac)
-		lst_indexing(stack_a, i + 1, tab[i]);	
+		lst_indexing(stack_a, i + 1, tab[i]);
 	free(tab);
 }
 
-char **parse_arg(int ac, char **av)
+char	**parse_arg(int ac, char **av)
 {
-	char **tmp;
+	char	**tmp;
 
 	if (ac < 2)
 		exit(1);
@@ -88,16 +102,16 @@ char **parse_arg(int ac, char **av)
 		while (--ac != 0)
 		{
 			tmp[ac - 1] = ft_strdup(av[ac]);
-				if (!tmp[ac - 1])
-					ft_free(tmp);
+			if (!tmp[ac - 1])
+				ft_free(tmp);
 		}
 	}
-	return(tmp);
+	return (tmp);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	char 	**tmp;
+	char	**tmp;
 	t_case	*stack_a;
 	t_case	*stack_b;
 
@@ -108,7 +122,7 @@ int main(int ac, char **av)
 	ac = ft_tablen(tmp);
 	stack_a = init_stack_a(stack_a, tmp);
 	if (!stack_a)
-		return(ft_free(tmp), 0);	
+		return (ft_free(tmp), 0);
 	looking_for_index(stack_a, ac);
 	ft_free(tmp);
 	push_swap(&stack_a, &stack_b);

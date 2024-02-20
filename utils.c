@@ -1,14 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/20 12:50:55 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/02/20 12:53:09 by mda-cunh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-
-int ft_tablen(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return(i);
-}
 
 int	ps_atoi(const char *nptr)
 {
@@ -43,14 +45,14 @@ t_case	*ft_newcase(int content)
 	return (newlst);
 }
 
-void ft_compactage(t_case *head, t_case *new_case, int i)
+void	ft_compactage(t_case *head, t_case *new_case, int i)
 {
-	t_case *tmp;
+	t_case	*tmp;
 
 	tmp = head;
 	if (!new_case)
 	{
-		free_lst(&head,NULL);
+		free_lst(&head, &new_case);
 		return ;
 	}
 	if (head->next == head && head->prev == head)
@@ -71,9 +73,9 @@ void ft_compactage(t_case *head, t_case *new_case, int i)
 
 int	ft_parse_error(char **tab)
 {
-	int i;
-	int j;
-	char *nb_test;
+	int		i;
+	int		j;
+	char	*nb_test;
 
 	i = 0;
 	j = 0;
@@ -83,24 +85,24 @@ int	ft_parse_error(char **tab)
 			j++;
 		while (tab[i][j])
 			if (!ft_isdigit(tab[i][j++]))
-				return(0);
+				return (0);
 		nb_test = ft_itoa(ft_atoi(tab[i]));
 		if (ft_strncmp(nb_test, tab[i], ft_strlen(tab[i])))
-			return(free(nb_test), 0);
+			return (free(nb_test), 0);
 		free(nb_test);
 		j = i;
-		while(tab[++j])
+		while (tab[++j])
 			if (ft_atoi(tab[i]) == ft_atoi(tab[j]))
 				return (0);
 		j = 0;
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
-t_case *init_stack_a(t_case *head, char **tab)
+t_case	*init_stack_a(t_case *head, char **tab)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	if (!ft_parse_error(tab) || !tab[0])
@@ -110,6 +112,8 @@ t_case *init_stack_a(t_case *head, char **tab)
 		exit(1);
 	}	
 	head = ft_newcase(ps_atoi(tab[0]));
+	if (!head)
+		return (NULL);
 	head->prev = head;
 	head->next = head;
 	head->real_pos = 1;
@@ -117,7 +121,7 @@ t_case *init_stack_a(t_case *head, char **tab)
 	{
 		ft_compactage(head, ft_newcase(ps_atoi(tab[i])), i + 1);
 		if (!head)
-			return(NULL);	
+			return (NULL);
 		i++;
 	}
 	return (head);

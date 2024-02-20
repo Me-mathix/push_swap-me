@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intruction.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/20 12:36:32 by mda-cunh          #+#    #+#             */
+/*   Updated: 2024/02/20 12:37:16 by mda-cunh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void ra_rra(t_case **stack, int i)
+void	ra_rra(t_case **stack, int i)
 {
 	if (i == 1)
 	{
@@ -15,7 +27,7 @@ void ra_rra(t_case **stack, int i)
 	uni_stack_pos_finder(*stack);
 }
 
-void rb_rrb(t_case **stack, int i)
+void	rb_rrb(t_case **stack, int i)
 {
 	if (i == 1)
 	{
@@ -30,9 +42,9 @@ void rb_rrb(t_case **stack, int i)
 	uni_stack_pos_finder(*stack);
 }
 
-void pb(t_case **s_a, t_case **s_b)
+void	pb(t_case **s_a, t_case **s_b)
 {
-	t_case *tmp;
+	t_case	*tmp;
 
 	if (!*s_b)
 	{
@@ -59,9 +71,9 @@ void pb(t_case **s_a, t_case **s_b)
 	printf("pb\n");
 }
 
-void pa(t_case **s_a, t_case **s_b)
+void	pa(t_case **s_a, t_case **s_b)
 {
-	t_case *tmp;
+	t_case	*tmp;
 
 	if (!*s_a)
 	{
@@ -88,7 +100,7 @@ void pa(t_case **s_a, t_case **s_b)
 	printf("pa\n");
 }
 
-void swapper_value(t_case **stack)
+void	swapper_value(t_case **stack)
 {
 	(*stack)->prev->next = (*stack)->next;
 	(*stack)->next->next->prev = *stack;
@@ -96,5 +108,5 @@ void swapper_value(t_case **stack)
 	(*stack)->prev = (*stack)->next;
 	(*stack)->next = (*stack)->prev->next;
 	(*stack)->prev->next = *stack;
-	*stack = (*stack)->prev; 
+	*stack = (*stack)->prev;
 }
