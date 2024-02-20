@@ -89,7 +89,7 @@ void little_sort(t_case **s_a, t_case **s_b)
 		pa(s_a, s_b);
 }
 
-void	pre_sort(t_case **s_a, t_case **s_b)
+void	pre_sort(t_case **s_a, t_case **s_b, int divider)
 {
 	int i;
 	int j;
@@ -97,7 +97,7 @@ void	pre_sort(t_case **s_a, t_case **s_b)
 	t_case *tmp;
 
 	i = 1;
-	perc = ps_lstsize(*s_a) / 8;
+	perc = ps_lstsize(*s_a) / divider;
 	j = ps_lstsize(*s_a);
 	tmp = *s_a;
 	while (i <= j + 2)
@@ -106,8 +106,8 @@ void	pre_sort(t_case **s_a, t_case **s_b)
 		{
 				road_to_b(s_a, s_b, tmp);
 				i++;
-				if (i == perc && (j / 16 > 0))
-					perc += j / 16;
+				if (i == perc)
+					perc += j / (divider + divider);
 				tmp = *s_a;
 		}
 		tmp = tmp->next;
@@ -145,7 +145,10 @@ void push_swap(t_case **s_a, t_case **s_b)
 {
 	if (ps_lstsize(*s_a) >= 80)
 	{
-		pre_sort(s_a, s_b);
+		if (ps_lstsize(*s_a) > 100)
+			pre_sort(s_a, s_b, 8);
+		else if (ps_lstsize(*s_a) <= 100)
+			pre_sort(s_a, s_b, 4);
 		end_sort(s_a, s_b);
 	}
 	else if (ps_lstsize(*s_a) >= 4)
