@@ -6,13 +6,13 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:54:49 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/20 13:00:59 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:08:10 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	micro_sort(t_case **s_a, t_case **s_b)
+void	micro_sort(t_case **s_a)
 {
 	while (!lst_is_sorted(*s_a))
 	{

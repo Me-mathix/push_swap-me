@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:48:52 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/02/20 12:58:29 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:07:59 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		lst_is_sorted(t_case *stack);
 
 // ALLSORT
 
-void	micro_sort(t_case **s_a, t_case **s_b);
+void	micro_sort(t_case **s_a);
 void	little_sort(t_case **s_a, t_case **s_b);
 void	pre_sort(t_case **s_a, t_case **s_b, int divider);
 void	end_sort(t_case **s_a, t_case **s_b);
